@@ -1,16 +1,16 @@
 # Overview
 
 ### Many old men are bald
-- Psychological Induction
+- Psychological Induction  
 &nbsp; - inductive statement based on experience  
-&nbsp; - also has certain predictive aspect  
+&nbsp; - also has certain predictive aspect    
 &nbsp; - no scientific explanation  
 
-- Statistical View
+- Statistical View  
 &nbsp; - the lack of hair = random variable  
 &nbsp; - estimate its distribution (depending on age) from past observations (traning sample)  
 
-- Philosophy of Science Approach
+- Philosophy of Science Approach  
 &nbsp; - find scientific theory to explain the lack of hair  
 &nbsp; - explanation itself is not sufficient  
 &nbsp; - true theory needs to make non-trivial predictions  
