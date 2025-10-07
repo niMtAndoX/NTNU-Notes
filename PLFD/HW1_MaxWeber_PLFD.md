@@ -18,7 +18,7 @@ Goal of this problem was to estimate a k-NN classfier to predict the election re
 
 ![Figure 2 — Year 2004 Election results and obesity index with small jitter vor visibility](year_2004.png)  
 
-First, the 2004 election results were used as training data, while the 2000 election results were used as test data. To choose the neighborhood size k for the k-NN classifier, I used leave-one-out cross-validation (LOOCV) on a dataset of n = 50. In LOOCV, each fold trains on n - 1 = 49 observations and tests on the single held-out point. Therefore, k must not exceed the training set size (k ≤ n - 1). Consequently, I tested k values from 1 to 49.
+First, the 2004 election results were used as training data, while the 2000 election results were used as test data. To choose the neighborhood size \(k\) for the k-NN classifier, I used leave-one-out cross-validation (LOOCV) on a dataset of \(n = 50\). In LOOCV, each fold trains on \(n - 1 = 49\) observations and tests on the single held-out point. Therefore, \(k\) must not exceed the training set size (\(k \le n - 1\)). Consequently, I tested \(k\) values from 1 to 49.
 
 #### Results of the LOOCV
 
@@ -48,7 +48,7 @@ First, the 2004 election results were used as training data, while the 2000 elec
 | 20 | 0.7255 |
 
 
-The LOOCV results indicate that the value of k with the highest accuracy is k = 7. With this k, we can now train the k-NN classifier on the 2004 election results.
+The LOOCV results indicate that the value of \(k\) with the highest accuracy is \(k = 7\). With this \(k\), we can now train the k-NN classifier on the 2004 election results.
 
 
 ### Predictions and and metrics of the k-NN classifier
@@ -97,7 +97,7 @@ Goal of this problem was to switch test and training data. So the year 2000 elec
 | 20 | 0.5882 |
 
 
-The LOOCV results indicate that the value of k with the highest accuracy is k = 16. With this k, we can now train the k-NN classifier on the 2000 election results.
+The LOOCV results indicate that the value of \(k\) with the highest accuracy is \(k = 16\). With this \(k\), we can now train the k-NN classifier on the 2000 election results.
 
 
 ### Predictions and and metrics of the k-NN classifier with switched test and training data
@@ -109,25 +109,28 @@ The LOOCV results indicate that the value of k with the highest accuracy is k = 
 | 37.25%           | 62.75%               |   16   | 37.25%     | 62.75%        |
 
 ### Changes
-We can see that, after swapping the training and test data, we get much better performance on new data but slightly worse performance on the already known data. The resampling error and the test error are equal, which suggests there is neither underfitting nor overfitting. The model generalizes well to new data.  
+We can see that, after swapping the training and test data, we get much better performance on new data but slightly worse performance on the already known data. The resampling error and the test error are equal, which suggests there is neither underfitting nor overfitting. The model generalizes well to new data.
 
-  
 ## Problem 2.11
 
 **Data Generating Process**
 
- The data consists of n = 10 samples, (x, y), where x is 
-uniformly distributed in [0,1] and y = x^2 +0.1x + noise and the noise has Gaussian distribution N(0, 0.25).
+We observe \(n=10\) samples \((x_i, y_i)\) with:
+- \(x_i \sim \mathrm{Unif}[0,1]\)
+- \(y_i = x_i^2 + 0.1\,x_i + \varepsilon_i\), where \(\varepsilon_i \sim \mathcal{N}(0,\,0.25)\)
+
 
 ### Trigonometric polynomial estimators
 The goal was to find an optimal regression model using trigonometric polynomial estimators i.e.
-f_m(x, w) = w_0 + sum_{i=1}^{m} w_i * cos(2pii*x), where m+1 is the model complexity .
+\( f_m(x,\mathbf{w}) = w_0 + \sum_{i=1}^{m} w_i \cos(2\pi i x) \), where \(m+1\) is the model complexity .
 
 
 
 Since we want to use the analytic schwarz criterion, we need to use the following equation:
 
-r(p, n) = 1 + (p/(1 - p)) ln n
+$$
+r(p,n) = 1 + \frac{p}{1-p}\,\ln n
+$$
 
 Now we are able to determine which is the optimal model using the analytic schwarz criterion:
 
@@ -145,10 +148,7 @@ Now we are able to determine which is the optimal model using the analytic schwa
 **Best degree by analytic Schwarz:**   m = 0
 
 ### Interpretation
-As m increases, the training error R_{\text{emp}} decreases slightly, but the penalty r(p,n) grows quickly—especially as k approaches n. In my table this makes the penalized score smallest at m=0 (k=1), i.e., the intercept-only model (a flat line). Larger m fit the data slightly better in-sample (lower RSS) but are heavily penalized, so their Schwarz risk is higher. Thus, by the analytic Schwarz criterion, the simplest model is preferred.
-
-  
-  
+As \(m\) increases, the training error \(R_{\text{emp}}\) decreases slightly, but the penalty \(r(p,n)\) grows quickly—especially as \(k\) approaches \(n\). In my table this makes the penalized score smallest at \(m=0\) \((k=1)\), i.e., the intercept-only model (a flat line). Larger \(m\) fit the data slightly better in-sample (lower RSS) but are heavily penalized, so their Schwarz risk is higher. Thus, by the analytic Schwarz criterion, the simplest model is preferred.
 
 
 ### Visualization of the results
@@ -156,16 +156,15 @@ As m increases, the training error R_{\text{emp}} decreases slightly, but the pe
 
 ![Figure 8 — trigonometric regression](trig_regression.png)  
 
-Since the data is non periodic and monotone increasing a trigonometric estimator using cosines will not be able to estimate the data well without being overly complex.  
-
-
+Since the data is non periodic and monotone increasing a trigonometric estimator using cosines will not be able to estimate the data well without being overly complex.
 
 ## 2.11 b)
 ### Algebraic polynomial estimators
 
 The goal was to find an optimal regression model now using algebraic polynomial estimators i.e. 
-
-f_m(x) = w_0 + w_1x + w_2x^2 + ... + w_m*x^m
+$$
+f_m(x)=w_0+w_1x+w_2x^2+\cdots+w_mx^m
+$$
 
 
 
@@ -184,16 +183,14 @@ Now we can use these to determine the optimal model:
 **Best degree by analytic Schwarz:** m = 1
 
 ### Interpretation
-Jumping from m=0 to m=1 (adding a slope) reduces RSS by ~74% (4.05 → 1.05), so the penalized score drops to 0.165. From m=1 to m=2 and beyond, RSS improves only a little, but the penalty rises a lot, so the Schwarz_risk increases. The best trade-off is m=1, i.e., a linear model (intercept + slope). Higher degrees overfit relative to their modest extra gain.
+Jumping from \(m=0\) to \(m=1\) (adding a slope) reduces RSS by ~74% (4.05 → 1.05), so the penalized score drops to 0.165. From \(m=1\) to \(m=2\) and beyond, RSS improves only a little, but the penalty rises a lot, so the Schwarz\_risk increases. The best trade-off is \(m=1\), i.e., a linear model (intercept + slope). Higher degrees overfit relative to their modest extra gain.
 
-**Comparing to trigonometric models.** Since the same criterion is used on the same data, you can compare the minima directly. The best polynomial (m=1, 0.165) beats the best trigonometric model (m=0, 0.508), so the polynomial family wins here.
+**Comparing to trigonometric models.** Since the same criterion is used on the same data, you can compare the minima directly. The best polynomial (\(m=1\), 0.165) beats the best trigonometric model (\(m=0\), 0.508), so the polynomial family wins here.
 
 ### Visualization of the results
 ![Figure 7 — schwarz vs m](alg_best_m.png)  
 
-![Figure 8 — trigonometric regression](alg_regression.png)    
-  
-
+![Figure 8 — trigonometric regression](alg_regression.png)  
 
 ## Problem 2.12
 The goal in this final problem was to compare the predictive accuracies of trigonometric and polynomial estimators using 5-fold cross-validation, after applying the analytic Schwarz criterion for model selection.
@@ -204,8 +201,8 @@ The goal in this final problem was to compare the predictive accuracies of trigo
 | Model family              | CV-MSE | m* per fold        |
 |---------------------------|:------:|--------------------|
 | Trigonometric (cos-only)  | 0.8104 | [5, 0, 0, 0, 0]    |
-| Polynomial (raw x)    | 0.4269 | [2, 1, 1, 4, 1]    |
+| Polynomial (raw \(x\))    | 0.4269 | [2, 1, 1, 4, 1]    |
 
-Because lower cross-validated mean squared error (CV-MSE) indicates better out-of-sample prediction, the polynomial family clearly yields better results (0.43 vs. 0.81). The trigonometric family’s frequent selection of m = 0 means that, on most training splits, a periodic structure isn’t necessary. The single instance with m = 5 likely overfits that fold, which cross-validation penalizes with a higher average MSE. The polynomial results are stable around a linear trend (mostly m = 1). Higher degrees yield only small training gains that do not translate into lower validation error.
+Because lower cross-validated mean squared error (CV-MSE) indicates better out-of-sample prediction, the polynomial family clearly yields better results (0.43 vs. 0.81). The trigonometric family’s frequent selection of \(m = 0\) means that, on most training splits, a periodic structure isn’t necessary. The single instance with \(m = 5\) likely overfits that fold, which cross-validation penalizes with a higher average MSE. The polynomial results are stable around a linear trend (mostly \(m = 1\)). Higher degrees yield only small training gains that do not translate into lower validation error.
 
 These results make sense because the data show a non-periodic, monotonic trend, which polynomials capture more naturally than cosine sums.
